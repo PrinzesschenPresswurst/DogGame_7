@@ -5,26 +5,50 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [Header("Laser")]
+    [SerializeField] private GameObject[] laserParticles;
+    
+    [Header("Projectile")]
     [SerializeField] private GameObject projectile;
-    [SerializeField] float shootCooldown = 0.5f;
+    [SerializeField] private float shootCooldown = 0.5f;
     private float _nextShot = 0.1f;
     
-
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        ShootProjectile();
+        ShootLaser();
+    }
+
+    private void ShootLaser()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            foreach (var laser in laserParticles)
+            {
+                var laserSystem = laser.GetComponent<ParticleSystem>();
+                laserSystem.Play();
+            }
+        }
+        
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            foreach (var laser in laserParticles)
+            {
+                var laserSystem = laser.GetComponent<ParticleSystem>();
+                laserSystem.Stop();
+            }
+        };
+    }
+
+    private void ShootProjectile()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             if (Time.time > _nextShot)
             {
-                Debug.Log("shoot");
                 Instantiate(projectile, transform.position, Quaternion.identity);
                 _nextShot = Time.time + shootCooldown;
-                Debug.Log("last shoot: " + _nextShot);
             }
         }
     }
-    
 }
