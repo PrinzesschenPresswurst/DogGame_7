@@ -9,13 +9,12 @@ public class LivesKeeper : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI livesText;
     private float _lives;
-    private GameManager _gameManager;
-
+    private PlayerDeathHandler _playerDeathHandler;
     private void Start()
     {
         _lives = 4;
         UpdateLives();
-        _gameManager = FindObjectOfType<GameManager>();
+        _playerDeathHandler = FindObjectOfType<PlayerDeathHandler>();
     }
 
     private void UpdateLives()
@@ -34,8 +33,7 @@ public class LivesKeeper : MonoBehaviour
     {
         if (_lives <= 0)
         {
-            Debug.Log("game over");
-            _gameManager.OnPlayerDeath();
+            _playerDeathHandler.PlayerDeathSequence();
         }
     }
 }

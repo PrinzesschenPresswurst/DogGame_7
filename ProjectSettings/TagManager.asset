@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Tree
   - Terrain
+  - Obstacle
   layers:
   - Default
   - TransparentFX

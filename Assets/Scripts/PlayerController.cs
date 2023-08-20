@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour
 
         //define the new pos and clamp it so dog doesnt go off the screen
         float newXPos = _currentPos.x + translateX;
-        float clampedNewXPos = Mathf.Clamp(newXPos, -10f, 10f);
+        float clampedNewXPos = Mathf.Clamp(newXPos, -17f, 17f);
         float newYPos = _currentPos.y + translateY;
-        float clampedNewYPos = Mathf.Clamp(newYPos,-5f,5.5f);
+        float clampedNewYPos = Mathf.Clamp(newYPos,-9f,9f);
        
         // actually move
         transform.localPosition = new Vector3(clampedNewXPos, clampedNewYPos, 0);

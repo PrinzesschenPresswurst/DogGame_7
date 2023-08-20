@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -7,13 +8,19 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Laser")]
     [SerializeField] private GameObject[] laserParticles;
+    private LaserSounds _laserSounds;
     
     [Header("Projectile")]
     [SerializeField] private GameObject projectile;
     [SerializeField] private float shootCooldown = 0.5f;
     private float _nextShot = 0.1f;
-    
-    void Update()
+
+    private void Start()
+    {
+        _laserSounds = FindObjectOfType<LaserSounds>();
+    }
+
+    private void Update()
     {
         ShootProjectile();
         ShootLaser();
@@ -27,6 +34,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 var laserSystem = laser.GetComponent<ParticleSystem>();
                 laserSystem.Play();
+                _laserSounds.OnLaserFire();
             }
         }
         
@@ -36,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 var laserSystem = laser.GetComponent<ParticleSystem>();
                 laserSystem.Stop();
+                _laserSounds.OnLaserRelease();
             }
         };
     }
