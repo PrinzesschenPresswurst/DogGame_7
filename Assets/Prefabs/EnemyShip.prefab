@@ -4911,10 +4911,7 @@ MonoBehaviour:
   scoreOnHit: 1
   enemyHp: 1
   enemyExplosionParticles: {fileID: 8141657139396004228, guid: 4c50e548cfb503d4daabb3d416481db4, type: 3}
-  defaultMaterial: {fileID: 2100000, guid: fead7e004fcf40743a5932e5c2759196, type: 2}
-  hitMaterial: {fileID: 2100000, guid: 8d22d23e35e0a404995f691c0e232650, type: 2}
-  enemyHitParticles: {fileID: 1126745116338269653, guid: a20fe55b05876f14cb6ae4dade8f70b1, type: 3}
-  enemyIsBoss: 0
+  enemyType: 1
 --- !u!95 &2745367582285626672
 Animator:
   serializedVersion: 5
@@ -4964,7 +4961,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.501}
-  m_LocalScale: {x: 0.54922, y: 0.54922, z: 0.54922}
+  m_LocalScale: {x: 0.82191736, y: 0.82191736, z: 0.82191736}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 148012106563062079}
@@ -5081,7 +5078,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7e87e4173c433a44ab98eba985426a7f, type: 2}
+  - {fileID: 2100000, guid: 6c202ad453868f742b98437f1c43c1be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5295,7 +5292,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7e87e4173c433a44ab98eba985426a7f, type: 2}
+  - {fileID: 2100000, guid: 6c202ad453868f742b98437f1c43c1be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

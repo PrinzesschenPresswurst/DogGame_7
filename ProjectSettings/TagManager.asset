@@ -9,6 +9,7 @@ TagManager:
   - Tree
   - Terrain
   - Obstacle
+  - SpawnAtRuntime
   layers:
   - Default
   - TransparentFX

@@ -13,29 +13,21 @@ public class Enemy_Hitpoint : MonoBehaviour
     
     [Header ("HP Stuff")]
     [SerializeField] private int enemyHp = 5;
-    private TextMeshPro _hpText;
     
     [Header("Feedback Kill")]
     [SerializeField] private ParticleSystem enemyExplosionParticles;
     private AudioHandler _audioHandler;
-
-    [Header("Feedback Hit")]
-    [SerializeField] private Material defaultMaterial;
-    [SerializeField] private Material hitMaterial;
-    [SerializeField] private ParticleSystem enemyHitParticles;
-    private MeshRenderer _meshRenderer;
-    [SerializeField] private bool enemyIsBoss = false;
+    
+    [Header("Enemy Type")]
+    [SerializeField] private int enemyType = 1;
+    
+    private GameObject _spawnAtRuntime;
 
     private void Start()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _audioHandler = FindObjectOfType<AudioHandler>();
-        if (enemyIsBoss!)
-        {
-            _hpText = GetComponentInChildren<TextMeshPro>();
-            _hpText.text = enemyHp.ToString();
-        }
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _spawnAtRuntime = GameObject.FindWithTag("SpawnAtRuntime");
     }
 
     private void OnParticleCollision(GameObject other)
@@ -45,24 +37,10 @@ public class Enemy_Hitpoint : MonoBehaviour
         CheckDeath();
     }
 
-    private void ProcessHit() // TODO extract into own script that is only on boss
+    private void ProcessHit()
     {
         _scoreKeeper.AddScore(scoreOnHit);
         enemyHp = enemyHp -1;
-        if (enemyIsBoss!)
-        {
-            _hpText.text = enemyHp.ToString();
-            StartCoroutine(EnemyHitFeedback());
-        }
-    }
-    
-    private IEnumerator EnemyHitFeedback()
-    {
-        var newHitExplosion = Instantiate(enemyHitParticles, transform.position, quaternion.identity);
-        newHitExplosion.Play();
-        _meshRenderer.material = hitMaterial;
-        yield return new WaitForSeconds(0.1f);
-        _meshRenderer.material = defaultMaterial;
     }
 
     private void CheckDeath()
@@ -71,9 +49,15 @@ public class Enemy_Hitpoint : MonoBehaviour
         {
             var newExplosion = Instantiate(enemyExplosionParticles, transform.position, quaternion.identity);
             newExplosion.Play();
-            _audioHandler.OnEnemyKill();  //TODO make this different between target and cat 
+            newExplosion.transform.SetParent(_spawnAtRuntime.transform);
+            _audioHandler.OnEnemyKill(enemyType);  //TODO make this different between target and cat 
             _scoreKeeper.AddScore(scoreOnKill);
             Destroy(this.gameObject);
         }
+    }
+
+    public int GetEnemyHp()
+    {
+        return enemyHp;
     }
 }

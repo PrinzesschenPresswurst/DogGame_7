@@ -10,6 +10,8 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip collideWithTerrain;
     [SerializeField] private AudioClip enemyExplode;
     [SerializeField] private AudioClip playerDeath;
+    [SerializeField] private AudioClip bossKill;
+    [SerializeField] private AudioClip targetHit;
     private AudioSource _audioSource;
 
     private void Start()
@@ -27,9 +29,21 @@ public class AudioHandler : MonoBehaviour
         _audioSource.PlayOneShot(collideWithTerrain);
     }
 
-    public void OnEnemyKill()
+    public void OnEnemyKill(int enemyType)
     {
-        _audioSource.PlayOneShot(enemyExplode);
+        if (enemyType == 1) // cat
+        {
+            _audioSource.PlayOneShot(enemyExplode);
+        }
+        else if (enemyType == 2) // boss
+        {
+            _audioSource.PlayOneShot(bossKill);
+        }
+        
+        else if (enemyType == 3) // taget
+        {
+            _audioSource.PlayOneShot(targetHit);
+        }
     }
 
     public void OnPlayerDeath()
