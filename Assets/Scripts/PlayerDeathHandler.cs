@@ -9,6 +9,7 @@ public class PlayerDeathHandler : MonoBehaviour
     private PlayerShoot _playerShoot;
     private GameManager _gameManager;
     private AudioHandler _audioHandler;
+    private LaserSounds _laserSounds;
     private Component[] _dogRenderers;
     
     [Header("Needed Particles")]
@@ -23,6 +24,7 @@ public class PlayerDeathHandler : MonoBehaviour
         _dogRenderers = GetComponentsInChildren<MeshRenderer>();
         _gameManager = FindObjectOfType<GameManager>();
         _audioHandler = FindObjectOfType<AudioHandler>();
+        _laserSounds = FindObjectOfType<LaserSounds>();
     }
 
     public void PlayerDeathSequence()
@@ -32,6 +34,7 @@ public class PlayerDeathHandler : MonoBehaviour
         trailParticle.Stop();
         crashParticles.Play();
         _audioHandler.OnPlayerDeath();
+        _laserSounds.OnLaserRelease();
         foreach (Component dogRenderer in _dogRenderers)
         {
             dogRenderer.GetComponent<MeshRenderer>().enabled = false;

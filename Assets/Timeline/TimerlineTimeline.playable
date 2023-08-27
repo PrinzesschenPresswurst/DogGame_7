@@ -252,7 +252,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Wave 2
   - m_Version: 1
-    m_Start: 15.466666666666667
+    m_Start: 16.15
     m_ClipIn: 0
     m_Asset: {fileID: 7383497663021788940}
     m_Duration: 5.983333333332999

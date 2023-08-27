@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.Playables;
 using UnityEngine.Rendering.HighDefinition;
 
@@ -17,6 +18,7 @@ public class PlayerCollision : MonoBehaviour
     private LivesKeeper _livesKeeper;
     private PlayerDeathHandler _playerDeathHandler;
     private AudioHandler _audioHandler;
+    private GameManager _gameManager;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class PlayerCollision : MonoBehaviour
         _livesKeeper = FindObjectOfType<LivesKeeper>();
         _playerDeathHandler = GetComponent<PlayerDeathHandler>();
         _audioHandler = FindObjectOfType<AudioHandler>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -55,6 +58,11 @@ public class PlayerCollision : MonoBehaviour
             case "Loop":
                 _scoreKeeper.AddScore(scoreOnLoop);
                 _audioHandler.OnFlyThroughLoop();
+                break;
+            
+            case "Goal":
+                Debug.Log("Collided with" + other.gameObject.name);
+                StartCoroutine(_gameManager.OnPlayerReachedGoal());
                 break;
         }
     }

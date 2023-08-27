@@ -10,6 +10,7 @@ TagManager:
   - Terrain
   - Obstacle
   - SpawnAtRuntime
+  - Goal
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,21 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip playerDeath;
     [SerializeField] private AudioClip bossKill;
     [SerializeField] private AudioClip targetHit;
+    [SerializeField] private AudioClip playerWin;
     private AudioSource _audioSource;
+
+    private void Awake() // Singelton Pattern
+    {
+        int numberOfAudioHandlers = FindObjectsOfType<AudioHandler>().Length;
+        if (numberOfAudioHandlers > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -49,6 +63,11 @@ public class AudioHandler : MonoBehaviour
     public void OnPlayerDeath()
     {
         _audioSource.PlayOneShot(playerDeath);
+    }
+
+    public void OnGoalReached()
+    {
+        _audioSource.PlayOneShot(playerWin);
     }
     
 }
