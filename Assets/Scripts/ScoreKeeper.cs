@@ -9,6 +9,19 @@ public class ScoreKeeper : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
     private float _score;
+    
+    private void Awake() // Singelton Pattern
+    {
+        int numberOfScorekeepers = FindObjectsOfType<ScoreKeeper>().Length;
+        if (numberOfScorekeepers > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     private void Start()
     {

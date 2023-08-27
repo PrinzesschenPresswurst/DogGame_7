@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Canvas gameOverCanvas;
     [SerializeField] private Canvas winCanvas;
+    [SerializeField] private Canvas gameCanvas;
     private int _currentScene;
     private AudioHandler _audioHandler;
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         gameOverCanvas.enabled = false;
         winCanvas.enabled = false;
+        gameCanvas.enabled = true;
         _currentScene = SceneManager.GetActiveScene().buildIndex;
         _audioHandler = FindObjectOfType<AudioHandler>();
     }
@@ -37,11 +39,11 @@ public class GameManager : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
 
-        if (_currentScene < scenes-1)
-        {
+        //if (_currentScene < scenes-1)
+        //{
             SceneManager.LoadScene(_currentScene + 1);
-        }
+        //}
 
-        else SceneManager.LoadScene(0);
+        //else SceneManager.LoadScene(0);
     }
 }
